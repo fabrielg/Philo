@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:48 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:45:16 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/05/16 02:58:55 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,20 @@ static int	get_args(t_project *project, int argc, char *argv[])
 static int	get_philos(t_project *project)
 {
 	unsigned char	id;
-	t_philo			p;
-	t_list2			*new;
+	t_philo			*p;
+	t_list2			*node;
 
 	id = 0;
 	while (id < project->nb_philos)
 	{
 		p = new_philo(THINKING, 0, 0);
-		p.id = id;
-		new = ft_lstnew2(&p);
-		if (!new)
+		if (!p)
+			return (ft_lstclear2(&project->philos, free), 0);
+		p->id = id;
+		node = ft_lstnew2(p);
+		if (!node)
 			return (0);
-		ft_lstadd_back2(&project->philos, new);
+		ft_lstadd_back2(&project->philos, node);
 		id++;
 	}
 	return (1);

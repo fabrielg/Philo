@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:44 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:33:04 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/05/16 02:59:01 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 	}
 	if (!parsing(&project, argc, argv))
 		return (ft_putendl_fd("Error while parsing arguments.", 2), 0);
-	display_philos(project.philos);
-	ft_lstclear2(&project.philos, NULL);
+	ft_lstclear2(&project.philos, free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:32:36 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/05/16 02:52:19 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_project
 }	t_project;
 
 int		parsing(t_project *project, int argc, char *argv[]);
-t_philo	new_philo(t_state state, int fork, int nb_eats);
+t_philo	*new_philo(t_state state, int fork, int nb_eats);
 void	philos_update_id(t_list2 *philos);
 void	display_philos(t_list2 *philos);
 
