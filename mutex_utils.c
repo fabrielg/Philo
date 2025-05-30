@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   mutex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 17:28:39 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/30 20:22:47 by gfrancoi         ###   ########.fr       */
+/*   Created: 2025/05/30 17:28:19 by gfrancoi          #+#    #+#             */
+/*   Updated: 2025/05/30 17:28:40 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "./libft/libft.h"
-#include <stdlib.h>
 
-void	display_philos(t_philo *philos, int nb_philo)
+void	mutex_op(t_mutex *mtx, t_mtx_op op)
 {
-	t_philo	p;
-	int		i;
-
-	i = -1;
-	while (++i < nb_philo)
-	{
-		p = philos[i];
-		ft_printf("Philo[%03d]: state:%d, fork right:[%d] %p, \
-			fork left:[%d] %p, nb_eats:%d, last eat:%d\n",
-			p.id, p.state, p.right_fork->id, p.right_fork->fork, \
-			p.left_fork->id, p.left_fork->fork, p.nb_eats, p.last_eat);
-	}
+	if (op == LOCK)
+		pthread_mutex_lock(mtx);
+	else if (op == UNLOCK)
+		pthread_mutex_unlock(mtx);
+	else if (op == INIT)
+		pthread_mutex_init(mtx, NULL);
+	else if (op == DESTROY)
+		pthread_mutex_destroy(mtx);
 }
