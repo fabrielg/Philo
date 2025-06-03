@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:48 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/30 20:21:33 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:14:29 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ static int	get_args(t_table *table, int argc, char *argv[])
 
 static void	assign_forks(t_philo *p, t_fork *forks, int position)
 {
-	if (p->id % 2 == 0)
-	{
-		p->right_fork = &forks[position];
-		p->left_fork = &forks[(position + 1) % p->table->nb_philos];
-		return ;
-	}
 	p->right_fork = &forks[(position + 1) % p->table->nb_philos];
 	p->left_fork = &forks[position];
 }
