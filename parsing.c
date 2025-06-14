@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:48 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/06/03 23:14:29 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/06/13 19:48:56 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int	parsing(t_table *table, int argc, char *argv[])
 		return (0);
 	if (!init_philos(table))
 		return (0);
+	mutex_op(&table->table_access, INIT);
 	return (1);
 }
