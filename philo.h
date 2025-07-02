@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/06/13 20:20:34 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:17:01 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ typedef enum e_state
 {
 	EATING,
 	THINKING,
-	SLEEPING
+	SLEEPING,
+	TAKE_LEFT_FORK,
+	TAKE_RIGHT_FORK,
+	DIED
 }	t_state;
 
 typedef enum e_mtx_op
@@ -62,8 +65,10 @@ struct s_philo
 	t_fork			*right_fork;
 	t_fork			*left_fork;
 	int				nb_eats;
+	int				full;
 	long			last_eat;
 	pthread_t		thread;
+	t_mutex			philo_access;
 	t_table			*table;
 };
 
@@ -79,7 +84,8 @@ struct s_table
 	int		all_threads_ready;
 	t_fork	*forks;
 	t_philo	*philos;
-	t_mutex	table_acces;
+	t_mutex	print;
+	t_mutex	table_access;
 };
 
 /*		Main Functions		*/
@@ -92,7 +98,9 @@ void	dinner_time(t_table *table);
 void	display_philos(t_philo *philos, int nb_philo);
 int		is_simulation_finished(t_table *table);
 void	wait_all_threads(t_table *table);
-long	get_time(t_code_units unit);
+long	get_time(t_time_units unit);
+void	usleep_strict(long usec, t_table *table);
+void	print_state(t_state state, t_philo *philo);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);

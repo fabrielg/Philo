@@ -6,7 +6,7 @@
 #    By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:30:31 by gfrancoi          #+#    #+#              #
-#    Updated: 2025/05/30 20:22:53 by gfrancoi         ###   ########.fr        #
+#    Updated: 2025/07/02 15:56:40 by gfrancoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,15 @@ LIBFT =				./libft/libft.a
 
 SRCS = \
 	main.c\
-	parsing.c\
-	thread_utils.c\
+	dinner.c\
+	getters.c\
 	mutex_utils.c\
-	philo_utils.c
+	parsing.c\
+	philo_utils.c\
+	print_state.c\
+	setters.c\
+	synchro.c\
+	thread_utils.c
 
 OBJ_DIR = obj
 

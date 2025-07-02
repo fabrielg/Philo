@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:48 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/06/13 19:48:56 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:32:07 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ static int	init_philos(t_table *table)
 		p = table->philos + id;
 		p->id = id + 1;
 		p->nb_eats = 0;
+		p->full = 0;
 		p->state = THINKING;
 		p->last_eat = -1;
 		p->table = table;
+		mutex_op(&p->philo_access, INIT);
 		assign_forks(p, table->forks, id);
 		id++;
 	}
@@ -88,5 +90,6 @@ int	parsing(t_table *table, int argc, char *argv[])
 	if (!init_philos(table))
 		return (0);
 	mutex_op(&table->table_access, INIT);
+	mutex_op(&table->print, INIT);
 	return (1);
 }

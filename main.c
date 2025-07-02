@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:44 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/05/30 20:26:57 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:09:38 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char *argv[])
 	if (!parsing(&table, argc, argv))
 		return (ft_putendl_fd("Error while parsing arguments.", 2), 0);
 	display_philos(table.philos, table.nb_philos);
+	dinner_time(&table);
 	clear_table(&table);
 	return (0);
 }
