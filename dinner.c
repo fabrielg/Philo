@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/02 16:02:17 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 14:40:38 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	eat(t_philo *philo)
 	print_state(EATING, philo);
 	usleep_strict(table->time_to_eat, table);
 	if (table->nb_eats_before_stop > 0
-		&& philo->nb_eats == table->nb_eats_before_stop)
+		&& philo->nb_eats >= table->nb_eats_before_stop)
 		set_int(&philo->philo_access, &philo->full, 1);
 	mutex_op(&philo->left_fork->fork, UNLOCK);
 	mutex_op(&philo->right_fork->fork, UNLOCK);

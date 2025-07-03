@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:48 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/02 16:16:13 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 14:46:38 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static int	get_args(t_table *table, int argc, char *argv[])
 		return (0);
 	if (!ft_atoi_strict(argv[4], &table->time_to_sleep))
 		return (0);
+	table->nb_eats_before_stop = -1;
 	if (argc == 6 && !ft_atoi_strict(argv[5], &table->nb_eats_before_stop))
 		return (0);
-	else
-		table->nb_eats_before_stop = -1;
 	if (table->nb_philos < 1 || table->time_to_die < 0 \
 		|| table->time_to_eat < 0 || table->time_to_sleep < 0)
 		return (0);
