@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:28:39 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 18:09:05 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:04:27 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	usleep_strict(long usec, t_table *table)
 		elapsed = get_time(MICROSECOND) - start;
 		remaining = usec - elapsed;
 		if (remaining > 1e3)
-			usleep(usec / 2);
+			usleep(remaining / 2);
 		else
 		{
 			while (get_time(MICROSECOND) - start < usec)

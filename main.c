@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:44 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/02 16:09:38 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:01:58 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,19 @@ void	error_exit(int error)
 
 void	clear_table(t_table *table)
 {
-	if (table && table->philos)
-		free(table->philos);
-	if (table && table->forks)
-		free(table->forks);
+	t_philo	*philo;
+	int		i;
+
+	i = -1;
+	while (++i < table->nb_philos)
+	{
+		philo = table->philos + i;
+		mutex_op(&philo->philo_access, DESTROY);
+	}
+	mutex_op(&table->print, DESTROY);
+	mutex_op(&table->table_access, DESTROY);
+	free(table->forks);
+	free(table->philos);
 }
 
 int	main(int argc, char *argv[])
@@ -40,7 +49,6 @@ int	main(int argc, char *argv[])
 		error_exit(0);
 	if (!parsing(&table, argc, argv))
 		return (ft_putendl_fd("Error while parsing arguments.", 2), 0);
-	display_philos(table.philos, table.nb_philos);
 	dinner_time(&table);
 	clear_table(&table);
 	return (0);
