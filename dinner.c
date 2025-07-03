@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 18:44:12 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:54:23 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,9 @@ void	dinner_time(t_table *table)
 	i = -1;
 	while (++i < table->nb_philos)
 		thread_op(&table->philos[i].thread, NULL, NULL, JOIN);
+	if (DEBUG_MODE && !get_int(&table->table_access, &table->stop_simulation))
+		printf(GREEN_B"All philosophers have eaten %d times 🎉\n"RESET,
+			table->nb_eats_before_stop);
+	set_int(&table->table_access, &table->stop_simulation, 1);
+	thread_op(&table->ryuk, NULL, NULL, JOIN);
 }
