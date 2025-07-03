@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/02 15:17:01 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 14:56:47 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "./libft/libft.h"
 # include <pthread.h>
+
+# define DEBUG_MODE 1
 
 typedef pthread_mutex_t	t_mutex;
 typedef struct s_philo	t_philo;
@@ -101,6 +103,7 @@ void	wait_all_threads(t_table *table);
 long	get_time(t_time_units unit);
 void	usleep_strict(long usec, t_table *table);
 void	print_state(t_state state, t_philo *philo);
+void	print_state_debug(t_state state, t_philo *philo, long elapsed);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);
