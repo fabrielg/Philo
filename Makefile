@@ -6,7 +6,7 @@
 #    By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:30:31 by gfrancoi          #+#    #+#              #
-#    Updated: 2025/07/02 15:56:40 by gfrancoi         ###   ########.fr        #
+#    Updated: 2025/07/03 15:49:23 by gfrancoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = \
 	parsing.c\
 	philo_utils.c\
 	print_state.c\
+	ryuk.c\
 	setters.c\
 	synchro.c\
 	thread_utils.c

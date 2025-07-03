@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 14:56:47 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:44:32 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./libft/libft.h"
 # include <pthread.h>
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 
 typedef pthread_mutex_t	t_mutex;
 typedef struct s_philo	t_philo;
@@ -76,18 +76,20 @@ struct s_philo
 
 struct s_table
 {
-	int		nb_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		nb_eats_before_stop;
-	long	start_simulation;
-	int		stop_simulation;
-	int		all_threads_ready;
-	t_fork	*forks;
-	t_philo	*philos;
-	t_mutex	print;
-	t_mutex	table_access;
+	int			nb_philos;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			nb_eats_before_stop;
+	long		start_simulation;
+	int			stop_simulation;
+	int			all_threads_ready;
+	int			nb_threads_ready;
+	t_fork		*forks;
+	t_philo		*philos;
+	pthread_t	ryuk;
+	t_mutex		print;
+	t_mutex		table_access;
 };
 
 /*		Main Functions		*/
@@ -95,6 +97,7 @@ int		parsing(t_table *project, int argc, char *argv[]);
 void	clear_table(t_table *table);
 void	error_exit(int error);
 void	dinner_time(t_table *table);
+void	*wait_for_death(void *data);
 
 /*		Utils Functions		*/
 void	display_philos(t_philo *philos, int nb_philo);
@@ -103,7 +106,8 @@ void	wait_all_threads(t_table *table);
 long	get_time(t_time_units unit);
 void	usleep_strict(long usec, t_table *table);
 void	print_state(t_state state, t_philo *philo);
-void	print_state_debug(t_state state, t_philo *philo, long elapsed);
+void	increase_threads_counts(t_table *table);
+int		all_thread_running(t_mutex *mtx, int threads, int nb_philos);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);

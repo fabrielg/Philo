@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 14:40:38 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:44:12 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	eat(t_philo *philo)
 	set_long(&philo->philo_access, &philo->last_eat, get_time(MILLISECOND));
 	philo->nb_eats++;
 	print_state(EATING, philo);
-	usleep_strict(table->time_to_eat, table);
+	usleep_strict(table->time_to_eat * 1e3, table);
 	if (table->nb_eats_before_stop > 0
 		&& philo->nb_eats >= table->nb_eats_before_stop)
 		set_int(&philo->philo_access, &philo->full, 1);
@@ -43,6 +43,11 @@ static void	*dinner_simulation(void *data)
 
 	philo = (t_philo *) data;
 	wait_all_threads(philo->table);
+	set_long(&philo->philo_access, &philo->last_eat, get_time(MILLISECOND));
+	increase_threads_counts(philo->table);
+	while (!all_thread_running(&philo->table->table_access,
+		philo->table->nb_threads_ready, philo->table->nb_philos))
+		;
 	while (!is_simulation_finished(philo->table))
 	{
 		if (philo->full)
@@ -55,6 +60,20 @@ static void	*dinner_simulation(void *data)
 	return (NULL);
 }
 
+static void	*one_philo(void *data)
+{
+	t_philo	*p;
+
+	p = (t_philo *)data;
+	wait_all_threads(p->table);
+	set_long(&p->philo_access, &p->last_eat, get_time(MILLISECOND));
+	increase_threads_counts(p->table);
+	print_state(TAKE_LEFT_FORK, p);
+	while (!is_simulation_finished(p->table))
+		usleep(200);
+	return (NULL);
+}
+
 void	dinner_time(t_table *table)
 {
 	int	i;
@@ -63,13 +82,15 @@ void	dinner_time(t_table *table)
 	if (table->nb_eats_before_stop == 0)
 		return ;
 	else if (table->nb_philos == 1)
-		;	//TODO
+		thread_op(&table->philos[0].thread, one_philo,
+				&table->philos[0], CREATE);
 	else
 	{
 		while (++i < table->nb_philos)
 			thread_op(&table->philos[i].thread, dinner_simulation,
 				&table->philos[i], CREATE);
 	}
+	thread_op(&table->ryuk, wait_for_death, table, CREATE);
 	table->start_simulation = get_time(MILLISECOND);
 	set_int(&table->table_access, &table->all_threads_ready, 1);
 	i = -1;
