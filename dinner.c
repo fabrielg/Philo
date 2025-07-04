@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 14:54:07 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 22:20:29 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	*dinner_simulation(void *data)
 			break ;
 		eat(philo);
 		print_state(SLEEPING, philo);
-		usleep_strict(philo->table->time_to_sleep, philo->table);
+		usleep_strict(philo->table->time_to_sleep * 1e3, philo->table);
 		thinking(philo);
 	}
 	return (NULL);
