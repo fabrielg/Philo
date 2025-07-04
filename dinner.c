@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 22:20:29 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 23:09:15 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,22 @@ static void	eat(t_philo *philo)
 	mutex_op(&philo->right_fork->fork, UNLOCK);
 }
 
-static void	thinking(t_philo *philo)
+void	thinking(t_philo *philo, int pre_simulation)
 {
-	print_state(THINKING, philo);
+	long	time_to_eat;
+	long	time_to_sleep;
+	long	time_to_think;
+
+	if (!pre_simulation)
+		print_state(THINKING, philo);
+	if (philo->table->nb_eats_before_stop % 2 == 0)
+		return ;
+	time_to_eat = philo->table->time_to_eat;
+	time_to_sleep = philo->table->time_to_sleep;
+	time_to_think = time_to_eat * 2 - time_to_sleep;
+	if (time_to_think < 0)
+		time_to_think = 0;
+	usleep_strict(time_to_think, philo->table);
 }
 
 static void	*dinner_simulation(void *data)
@@ -45,6 +58,7 @@ static void	*dinner_simulation(void *data)
 	wait_all_threads(philo->table);
 	set_long(&philo->philo_access, &philo->last_eat, get_time(MILLISECOND));
 	increase_threads_counts(philo->table);
+	desync_philos(philo);
 	while (!all_thread_running(&philo->table->table_access,
 			philo->table->nb_threads_ready, philo->table->nb_philos))
 		;
@@ -55,7 +69,7 @@ static void	*dinner_simulation(void *data)
 		eat(philo);
 		print_state(SLEEPING, philo);
 		usleep_strict(philo->table->time_to_sleep * 1e3, philo->table);
-		thinking(philo);
+		thinking(philo, 0);
 	}
 	return (NULL);
 }

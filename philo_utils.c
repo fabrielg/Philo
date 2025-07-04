@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:28:39 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 14:54:22 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 23:05:17 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include "./libft/libft.h"
 #include <stdlib.h>
 #include <sys/time.h>
-
-void	display_philos(t_philo *philos, int nb_philo)
-{
-	t_philo	p;
-	int		i;
-
-	i = -1;
-	while (++i < nb_philo)
-	{
-		p = philos[i];
-		ft_printf("Philo[%03d]: state:%d, fork left:[%d], ",
-			p.id, p.state, p.left_fork->id, &p.left_fork->fork);
-		ft_printf("fork right:[%d], nb_eats:%d, last eat:%d\n",
-			p.right_fork->id, &p.right_fork->fork, p.nb_eats, p.last_eat);
-	}
-}
 
 int	is_simulation_finished(t_table *table)
 {
@@ -79,4 +63,15 @@ void	increase_threads_counts(t_table *table)
 	mutex_op(&table->table_access, LOCK);
 	table->nb_threads_ready++;
 	mutex_op(&table->table_access, UNLOCK);
+}
+
+void	desync_philos(t_philo *philo)
+{
+	if (philo->table->nb_philos % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			usleep_strict(3e4, philo->table);
+	}
+	else if (philo->id % 2)
+		thinking(philo, 1);
 }

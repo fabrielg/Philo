@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 20:26:24 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 23:06:52 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int		parsing(t_table *project, int argc, char *argv[]);
 void	clear_table(t_table *table);
 int		error_exit(int error);
 void	dinner_time(t_table *table);
+void	thinking(t_philo *philo, int pre_simulation);
 void	*wait_for_death(void *data);
 
 /*		Utils Functions		*/
-void	display_philos(t_philo *philos, int nb_philo);
 int		is_simulation_finished(t_table *table);
 void	wait_all_threads(t_table *table);
 long	get_time(t_time_units unit);
@@ -108,6 +108,7 @@ void	usleep_strict(long usec, t_table *table);
 void	print_state(t_state state, t_philo *philo);
 void	increase_threads_counts(t_table *table);
 int		all_thread_running(t_mutex *mtx, int threads, int nb_philos);
+void	desync_philos(t_philo *philo);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);
