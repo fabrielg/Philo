@@ -6,14 +6,14 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:32:44 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 19:01:58 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 15:10:07 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "./libft/libft.h"
 
-void	error_exit(int error)
+int	error_exit(int error)
 {
 	if (error == 0)
 	{
@@ -21,7 +21,7 @@ void	error_exit(int error)
 		ft_putstr_fd("<time_to_die> <time_to_eat> <time_to_sleep> ", 2);
 		ft_putendl_fd("[number_of_times_each_philosopher_must_eat]", 2);
 	}
-	exit(0);
+	return (error);
 }
 
 void	clear_table(t_table *table)
@@ -46,7 +46,7 @@ int	main(int argc, char *argv[])
 	t_table	table;
 
 	if (!(5 <= argc && argc <= 6))
-		error_exit(0);
+		return (error_exit(0));
 	if (!parsing(&table, argc, argv))
 		return (ft_putendl_fd("Error while parsing arguments.", 2), 0);
 	dinner_time(&table);

@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 15:07:19 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 15:10:26 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ struct s_table
 /*		Main Functions		*/
 int		parsing(t_table *project, int argc, char *argv[]);
 void	clear_table(t_table *table);
-void	error_exit(int error);
+int		error_exit(int error);
 void	dinner_time(t_table *table);
 void	*wait_for_death(void *data);
 
