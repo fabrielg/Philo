@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 15:10:26 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 20:26:24 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./libft/libft.h"
 # include <pthread.h>
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 
 typedef pthread_mutex_t	t_mutex;
 typedef struct s_philo	t_philo;

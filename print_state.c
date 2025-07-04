@@ -6,18 +6,18 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:05:47 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 15:07:09 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 20:31:34 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-#define LEFT_FORK "%6ld %s%d takes the left fork\n"
-#define RIGHT_FORK "%6ld %s%d takes the right fork\n"
-#define IS_EATING "%6ld %s%d is eating\n"
-#define IS_SLEEPING "%6ld %s%d is sleeping\n"
-#define IS_THINKING "%6ld %s%d is thinking\n"
-#define IS_DEAD "%6ld %s%d died\n"
+#define LEFT_FORK "%ld %s%d has taken a fork\n"
+#define RIGHT_FORK "%ld %s%d has taken a fork\n"
+#define IS_EATING "%ld %s%d is eating\n"
+#define IS_SLEEPING "%ld %s%d is sleeping\n"
+#define IS_THINKING "%ld %s%d is thinking\n"
+#define IS_DEAD "%ld %s%d died\n"
 
 #define D_LEFT_FORK "[%6ld] %s%d takes the left fork	[🍴 - %d]\n"
 #define D_RIGHT_FORK "[%6ld] %s%d takes the right fork\t[%d - 🍴]\n"
