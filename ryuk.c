@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:22:04 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 18:12:53 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:55:44 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*wait_for_death(void *data)
 
 	table = (t_table *)data;
 	while (!all_thread_running(&table->table_access,
-		table->nb_threads_ready, table->nb_philos))
+			table->nb_threads_ready, table->nb_philos))
 		;
 	while (!is_simulation_finished(table))
 	{

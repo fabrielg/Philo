@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/03 18:54:23 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:54:07 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	*dinner_simulation(void *data)
 	set_long(&philo->philo_access, &philo->last_eat, get_time(MILLISECOND));
 	increase_threads_counts(philo->table);
 	while (!all_thread_running(&philo->table->table_access,
-		philo->table->nb_threads_ready, philo->table->nb_philos))
+			philo->table->nb_threads_ready, philo->table->nb_philos))
 		;
 	while (!is_simulation_finished(philo->table))
 	{
@@ -83,7 +83,7 @@ void	dinner_time(t_table *table)
 		return ;
 	else if (table->nb_philos == 1)
 		thread_op(&table->philos[0].thread, one_philo,
-				&table->philos[0], CREATE);
+			&table->philos[0], CREATE);
 	else
 	{
 		while (++i < table->nb_philos)
