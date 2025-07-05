@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/05 13:20:24 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:05:31 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	thinking(t_philo *philo, int pre_simulation)
 
 	if (!pre_simulation)
 		print_state(THINKING, philo);
-	if (philo->table->nb_eats_before_stop % 2 == 0)
+	if (philo->table->nb_philos % 2 == 0)
 		return ;
 	time_to_eat = philo->table->time_to_eat;
 	time_to_sleep = philo->table->time_to_sleep;
