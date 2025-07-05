@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:33:05 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 23:06:52 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/05 18:44:07 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ struct s_table
 int		parsing(t_table *project, int argc, char *argv[]);
 void	clear_table(t_table *table);
 int		error_exit(int error);
-void	dinner_time(t_table *table);
+int		dinner_time(t_table *table);
 void	thinking(t_philo *philo, int pre_simulation);
+void	eat(t_philo *philo);
 void	*wait_for_death(void *data);
 
 /*		Utils Functions		*/
@@ -112,7 +113,7 @@ void	desync_philos(t_philo *philo);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);
-void	thread_op(pthread_t *t, void *(*f)(void *), void *data, t_thread_op op);
+int		thread_op(pthread_t *t, void *(*f)(void *), void *data, t_thread_op op);
 
 /*		Getters and Setters		*/
 int		get_int(t_mutex *mutex, int *value);
