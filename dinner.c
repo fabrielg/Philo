@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:37:00 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 23:09:15 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:20:24 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	thinking(t_philo *philo, int pre_simulation)
 	time_to_think = time_to_eat * 2 - time_to_sleep;
 	if (time_to_think < 0)
 		time_to_think = 0;
-	usleep_strict(time_to_think, philo->table);
+	usleep_strict(time_to_think * 1e3, philo->table);
 }
 
 static void	*dinner_simulation(void *data)
