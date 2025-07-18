@@ -16,7 +16,9 @@
 # include "./libft/libft.h"
 # include <pthread.h>
 
-# define DEBUG_MODE 0
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE 0
+# endif
 
 typedef pthread_mutex_t	t_mutex;
 typedef struct s_philo	t_philo;

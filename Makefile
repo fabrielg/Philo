@@ -52,6 +52,9 @@ fclean: clean
 	make fclean -C ./libft/
 	rm -f $(NAME)
 
+debug: CFLAGS += -DDEBUG_MODE=1
+debug: re
+
 re: fclean all
 
 .PHONY: all fclean clean re bonus
