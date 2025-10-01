@@ -23,7 +23,7 @@ static void	*dinner_simulation(void *data)
 	desync_philos(philo);
 	while (!all_thread_running(&philo->table->table_access,
 			philo->table->nb_threads_ready, philo->table->nb_philos))
-		;
+		usleep_strict(100 * 1e3, philo->table);
 	while (!is_simulation_finished(philo->table))
 	{
 		if (philo->full)
