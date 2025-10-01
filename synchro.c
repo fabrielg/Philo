@@ -15,5 +15,5 @@
 void	wait_all_threads(t_table *table)
 {
 	while (!get_int(&table->table_access, &table->all_threads_ready))
-		usleep_strict(100 * 1e3, table);
+		;
 }

@@ -46,7 +46,7 @@ void	*wait_for_death(void *data)
 	table = (t_table *)data;
 	while (!all_thread_running(&table->table_access,
 			table->nb_threads_ready, table->nb_philos))
-			;
+			usleep_strict(1 * 1e3, table);
 	while (!is_simulation_finished(table))
 	{
 		i = -1;
@@ -58,6 +58,7 @@ void	*wait_for_death(void *data)
 				set_int(&table->table_access, &table->stop_simulation, 1);
 			}
 		}
+		usleep_strict(1 * 1e3, table);
 	}
 	return (NULL);
 }
