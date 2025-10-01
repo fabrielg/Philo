@@ -26,7 +26,7 @@ static int	get_args(t_table *table, int argc, char *argv[])
 	table->nb_eats_before_stop = -1;
 	if (argc == 6 && !ft_atoi_strict(argv[5], &table->nb_eats_before_stop))
 		return (0);
-	if (table->nb_philos < 1 || table->time_to_die < 0 \
+	if (table->nb_philos < 1 || table->time_to_die < 0
 		|| table->time_to_eat < 0 || table->time_to_sleep < 0)
 		return (0);
 	return (1);
