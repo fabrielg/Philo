@@ -12,8 +12,8 @@
 
 #include "philo.h"
 
-void	wait_all_threads(t_table *table)
+void	wait_start(long start_time)
 {
-	while (!get_int(&table->table_access, &table->all_threads_ready))
-		;
+	while (start_time > get_time(MILLISECOND))
+		usleep(100);
 }

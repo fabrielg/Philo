@@ -85,8 +85,6 @@ struct s_table
 	int			nb_eats_before_stop;
 	long		start_simulation;
 	int			stop_simulation;
-	int			all_threads_ready;
-	int			nb_threads_ready;
 	t_fork		*forks;
 	t_philo		*philos;
 	pthread_t	ryuk;
@@ -105,13 +103,11 @@ void	*wait_for_death(void *data);
 
 /*		Utils Functions		*/
 int		is_simulation_finished(t_table *table);
-void	wait_all_threads(t_table *table);
 long	get_time(t_time_units unit);
 void	usleep_strict(long usec, t_table *table);
 void	print_state(t_state state, t_philo *philo);
-void	increase_threads_counts(t_table *table);
-int		all_thread_running(t_mutex *mtx, int threads, int nb_philos);
 void	desync_philos(t_philo *philo);
+void	wait_start(long start_time);
 
 /*		Mutex and Threads Operations		*/
 void	mutex_op(t_mutex *mtx, t_mtx_op op);

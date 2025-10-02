@@ -17,13 +17,9 @@ static void	*dinner_simulation(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *) data;
-	wait_all_threads(philo->table);
+	wait_start(philo->table->start_simulation);
 	set_long(&philo->philo_access, &philo->last_eat, get_time(MILLISECOND));
-	increase_threads_counts(philo->table);
 	desync_philos(philo);
-	while (!all_thread_running(&philo->table->table_access,
-			philo->table->nb_threads_ready, philo->table->nb_philos))
-		;
 	while (!is_simulation_finished(philo->table))
 	{
 		if (philo->full)
@@ -41,9 +37,8 @@ static void	*one_philo(void *data)
 	t_philo	*p;
 
 	p = (t_philo *)data;
-	wait_all_threads(p->table);
+	wait_start(p->table->start_simulation);
 	set_long(&p->philo_access, &p->last_eat, get_time(MILLISECOND));
-	increase_threads_counts(p->table);
 	print_state(TAKE_LEFT_FORK, p);
 	while (!is_simulation_finished(p->table))
 		usleep(200);
@@ -81,10 +76,9 @@ int	dinner_time(t_table *table)
 
 	if (table->nb_eats_before_stop == 0)
 		return (1);
+	table->start_simulation = get_time(MILLISECOND) + (table->nb_philos * 20);
 	if (!create_threads(table))
 		return (0);
-	table->start_simulation = get_time(MILLISECOND);
-	set_int(&table->table_access, &table->all_threads_ready, 1);
 	i = -1;
 	while (++i < table->nb_philos)
 	{

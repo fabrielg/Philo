@@ -12,18 +12,6 @@
 
 #include "philo.h"
 
-int	all_thread_running(t_mutex *mtx, int threads, int nb_philos)
-{
-	int	result;
-
-	result = 0;
-	mutex_op(mtx, LOCK);
-	if (threads == nb_philos)
-		result = 1;
-	mutex_op(mtx, UNLOCK);
-	return (result);
-}
-
 static int	philo_died(t_philo *p)
 {
 	long	elapsed;
@@ -44,9 +32,7 @@ void	*wait_for_death(void *data)
 	int		i;
 
 	table = (t_table *)data;
-	while (!all_thread_running(&table->table_access,
-			table->nb_threads_ready, table->nb_philos))
-			usleep_strict(1 * 1e3, table);
+	wait_start(table->start_simulation + 1);
 	while (!is_simulation_finished(table))
 	{
 		i = -1;

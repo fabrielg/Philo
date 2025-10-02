@@ -58,13 +58,6 @@ void	usleep_strict(long usec, t_table *table)
 	}
 }
 
-void	increase_threads_counts(t_table *table)
-{
-	mutex_op(&table->table_access, LOCK);
-	table->nb_threads_ready++;
-	mutex_op(&table->table_access, UNLOCK);
-}
-
 void	desync_philos(t_philo *philo)
 {
 	if (philo->table->nb_philos % 2 == 0)
