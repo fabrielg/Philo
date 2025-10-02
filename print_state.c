@@ -26,9 +26,12 @@
 #define D_IS_THINKING "[%6ld] %s%d is thinking		[🤔]\n"
 #define D_IS_DEAD "[%6ld] %s%d died	[💀]\n"
 
-static void	print_state_debug(t_state state, t_philo *philo, long elapsed)
+static void	print_state_debug(t_state state, t_philo *philo)
 {
+	long	elapsed;
+
 	mutex_op(&philo->table->print, LOCK);
+	elapsed = get_time(MILLISECOND) - philo->table->start_simulation;
 	if (state == TAKE_LEFT_FORK && !is_simulation_finished(philo->table))
 		printf(D_LEFT_FORK, elapsed, BLACK, philo->id, philo->left_fork->id);
 	else if (state == TAKE_RIGHT_FORK && !is_simulation_finished(philo->table))
@@ -49,10 +52,10 @@ void	print_state(t_state state, t_philo *philo)
 {
 	long	elapsed;
 
-	elapsed = get_time(MILLISECOND) - philo->table->start_simulation;
 	if (DEBUG_MODE)
-		return (print_state_debug(state, philo, elapsed));
+		return (print_state_debug(state, philo));
 	mutex_op(&philo->table->print, LOCK);
+	elapsed = get_time(MILLISECOND) - philo->table->start_simulation;
 	if (state == TAKE_LEFT_FORK && !is_simulation_finished(philo->table))
 		printf(LEFT_FORK, elapsed, philo->id);
 	else if (state == TAKE_RIGHT_FORK && !is_simulation_finished(philo->table))

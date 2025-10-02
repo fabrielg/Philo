@@ -44,7 +44,6 @@ void	*wait_for_death(void *data)
 				set_int(&table->table_access, &table->stop_simulation, 1);
 			}
 		}
-		usleep_strict(1 * 1e3, table);
 	}
 	return (NULL);
 }
