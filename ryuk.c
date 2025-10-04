@@ -6,7 +6,7 @@
 /*   By: gfrancoi <gfrancoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:22:04 by gfrancoi          #+#    #+#             */
-/*   Updated: 2025/07/04 14:55:44 by gfrancoi         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:37:35 by gfrancoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	philo_died(t_philo *p)
 	long	elapsed;
 	long	time_to_die;
 
-	if (get_int(&p->philo_access, &p->full))
+	if (get_int(&p->philo_access, &p->full)
+		|| get_long(&p->philo_access, &p->last_eat) < 0)
 		return (0);
 	elapsed = get_time(MILLISECOND) - get_long(&p->philo_access, &p->last_eat);
 	time_to_die = p->table->time_to_die;
